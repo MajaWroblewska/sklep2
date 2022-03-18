@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>user</title>
+</head>
+<body>
+{% extends 'base.html' %}
+{% block content %}
+<h2>Urzytkownicy:</h2>
+        <table border="1" bgcolor="pink" style="border-top-style:double; border-color:yellow; color:darkblue">
+            <tr>
+                <td colspan="11"  style="text-align:right" > <input type="submit" class="dodaj" value="Dodaj nowego urzytkownika" onclick="window.location.href='/user/create'"></td>
+            </tr>
+
+            <tr>
+                <th rowspan="2">id</th>
+                <th rowspan="2">IMIE</th>
+                <th rowspan="2">NAZWISKO</th>
+                <th rowspan="2">LOGIN</th>
+                <th rowspan="2">EMAIL</th>
+                <th colspan="4" >ADRES</th>
+                <th rowspan="2" colspan="2">WYBÓR</th>
+            </tr>
+            <tr>
+                <th>kraj</th>
+                <th>miasto</th>
+                <th>ulica</th>
+                <th>numer</th>
+            </tr>
+            <tr>
+                {% for user in usery %}
+                <td> {{ user.id }}</td>
+                <td> {{ user.imie }}</td>
+                <td> {{ user.nazwisko }}</td>
+                <td> {{ user.login }}</td>
+                <td> {{ user.email.email }}</td>
+                <td> {{ user.adres.kraj }}</td>
+                <td> {{ user.adres.miasto }}</td>
+                <td> {{ user.adres.ulica }}</td>
+                <td> {{ user.adres.nr_budynku }} / {{ user.adres.nr_mieszkania }}</td>
+
+                <td> <input type="submit" value="zmień" onclick="window.location.href='/user/update'"> </td>
+                <td> <input type="submit" value="usuń" onclick="window.location.href='/user/delete'" style="color:red; background:yellow"></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+
+
+{% endblock %}
+
+</body>
+</html>

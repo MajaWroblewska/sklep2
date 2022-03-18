@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>create_form</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+    <h2>Utwórz nowy produkt:</h2>
+    <form method="post">
+        {% csrf_token %}
+        <table> {{ form }} </table>
+        <input type="submit" value="Dodaj", class="dodaj">
+    </form>
+    {% endblock %}
+</body>
+</html>

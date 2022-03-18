@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>adres update</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+    <h2>Modyfikacja adresu:</h2>
+    <form method="post">
+        {% csrf_token %}
+        <table> {{ form }} </table>
+        <input type="submit" value="Zmień", class="dodaj">
+        <button type="button" class="anuluj" onclick="window.location.href='/adres/'">Anuluj</button>
+    </form>
+    {% endblock %}
+</body>
+</html>

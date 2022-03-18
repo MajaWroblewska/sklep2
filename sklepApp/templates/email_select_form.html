@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>select email</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+    <h2 style="color:red">Wybór email</h2>
+        <form method="post">
+            {% csrf_token %}
+            <table> {{ form }} </table>
+            <button type="submit" class="wybierz">Wybierz</button>
+            <button type="button" class="anuluj" onclick="window.location.href='/email/'">Anuluj</button>
+        </form>
+    {% endblock %}
+
+
+</body>
+</html>

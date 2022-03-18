@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>user_form</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+    <h2>Modyfikacja urzytkownika:</h2>
+    <form method="post">
+        {% csrf_token %}
+        <table> {{ form }} </table>
+        <input type="submit" value="Zmien", class="dodaj">
+        <button type="button" class="anuluj" onclick="window.location.href='/user/'">Anuluj</button>
+
+    </form>
+    {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>kategoria</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+    <h2>Kategorie:</h2>
+        <table border="1" bgcolor="pink" style="border-top-style:double; border-color:yellow; color:darkblue">
+            <tr>
+                <td colspan="5" style="text-align:right" > <input type="submit" class="dodaj" value="Dodaj nową kategorię" onclick="window.location.href='/kategoria/create'"></td>
+            </tr>
+            <tr>
+                <th>id</th>
+                <th>NAZWA</th>
+                <th colspan="3">wybór</th>
+            </tr>
+            <tr>
+                {% for kategoria in kategorie %}
+                <td> {{ kategoria.id }}</td>
+                <td> {{ kategoria.nazwa }}</td>
+                <td> <button type="submit" class="pokaz" onclick="window.location.href='/kategoria/filtr'">Pokaż</button> </td>
+                <td> <button type="submit" class="pokaz" onclick="window.location.href='/kategoria/delete/'">Usuń</button> </td>
+                <td> <button type="submit" class="pokaz" onclick="window.location.href='/kategoria/update'">Zmień</button> </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>email</title>
+</head>
+<body>
+{% extends 'base.html' %}
+    {% block content %}
+    <h2>E-mail:</h2>
+        <table border="1" bgcolor="pink" style="border-top-style:double; border-color:yellow; color:darkblue">
+            <tr>
+                <td colspan="4" style="text-align:right" > <input type="submit" class="dodaj" value="Dodaj nowy e-mail" onclick="window.location.href='/email/create'"></td>
+            </tr>
+            <tr>
+                <th>id</th>
+                <th>NAZWA</th>
+                <th colspan="2">WYBÓR</th>
+
+            </tr>
+            <tr>
+                {% for email in emaile %}
+                <td> {{ email.id }}</td>
+                <td> {{ email.email }}</td>
+                <td> <input type="submit" value="zmień" onclick="window.location.href='/email/update'"> </td>
+                <td> <input type="submit" value="usuń" onclick="window.location.href='/email/delete'" style="color:red; background:yellow"></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    {% endblock %}
+</body>
+</html>

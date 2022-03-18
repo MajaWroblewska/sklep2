@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>select adres form</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+    <h2 style="color:red">Wybór adresów</h2>
+        <form method="post">
+            {% csrf_token %}
+            <table> {{ form }} </table>
+            <input type="submit" value="Wybierz" class="wybierz">
+            <button type="button" class="anuluj" onclick="window.location.href='/adres/'">Anuluj</button>
+
+        </form>
+    {% endblock %}
+</body>
+</html>

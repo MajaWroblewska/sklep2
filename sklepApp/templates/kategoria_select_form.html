@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>select update kategoria</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+    <h2 style="color:red">Wybór kategorii</h2>
+        <form method="post">
+            {% csrf_token %}
+            <table> {{ form }} </table>
+            <input type="submit" value="Wybierz" class="wybierz">
+            <input type="submit" value="Anuluj" onclick="window.location.href='/kategoria/'" class="anuluj">
+        </form>
+    {% endblock %}
+
+</body>
+</html>

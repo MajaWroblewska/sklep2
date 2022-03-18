@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>user_delete_form</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+    <h2>Usówanie urzytkowników:</h2>
+    <form method="post">
+        {% csrf_token %}
+        <h3>Jestes pewien, że chcesz usunąć: "{{ object }}" z bazy?</h3>
+        <input type="submit" value="Usuń" class="wybierz">
+        <button type="button" class="anuluj" onclick="window.location.href='/user/'">Anuluj</button>
+    </form>
+    {% endblock %}
+</body>
+</html>

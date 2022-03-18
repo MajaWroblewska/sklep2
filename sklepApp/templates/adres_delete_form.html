@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>delete adres</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+    <h2>Usówanie adresu:</h2>
+    <form method="post">
+        {% csrf_token %}
+        <h3>Jestes pewien, że chcesz usunąć: "{{ object }}" z bazy?</h3>
+        <input type="submit" value="Usuń" class="wybierz">
+        <input type="button" value="Anuluj" class="anuluj" onclick="window.location.href='/adres/'">
+
+    </form>
+
+    {% endblock %}
+
+
+
+</body>
+</html>

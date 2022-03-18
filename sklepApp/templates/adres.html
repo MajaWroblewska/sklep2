@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>adres </title>
+</head>
+<body>
+{% extends 'base.html' %}
+    {% block content %}
+    <h2>Adres:</h2>
+        <table border="1" bgcolor="pink" style="border-top-style:double; border-color:yellow; color:darkblue">
+            <tr>
+                <td colspan="8" style="text-align:right" > <input type="submit" class="dodaj" value="Dodaj nowy e-mail" onclick="window.location.href='/adres/create'"></td>
+            </tr>
+            <tr>
+                <th>id</th>
+                <th>KRAJ</th>
+                <th>MIASTO</th>
+                <th>ULICA</th>
+                <th>NR_BUDYNKU</th>
+                <th>NR_MIESZKANIA</th>
+                <th colspan="2">WYBÓR</th>
+
+            </tr>
+            <tr>
+                {% for adres in adresy %}
+                <td> {{ adres.id }}</td>
+                <td> {{ adres.kraj }}</td>
+                <td> {{ adres.miasto }}</td>
+                <td> {{ adres.ulica }}</td>
+                <td> {{ adres.nr_budynku }}</td>
+                <td> {{ adres.nr_mieszkania }}</td>
+                <td> <input type="submit" value="zmień" onclick="window.location.href='/adres/update'"></td>
+                <td> <input type="submit" value="usuń" onclick="window.location.href='/adres/delete'" style="color:red; background:yellow"></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    {% endblock %}
+
+</body>
+</html>
