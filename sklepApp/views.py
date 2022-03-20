@@ -32,24 +32,6 @@ class KategoriaView(View):
                       context={'kategorie': Kategoria.objects.all()}
                       )
 
-# class KategoriaFiltrView(View):
-#     def get(self,request):
-#         knazwa = Kategoria.objects.all()
-#         print(len(knazwa))
-#         # print(knazwa[1])
-#         for i in range(len(knazwa)):
-#             kate= knazwa[i]
-#             # print(dir(knazwa[i]))
-#         a=[knazwa[i].nazwa for i in range(len(knazwa))]
-#         print(a)
-#
-#         return render(request,
-#                       template_name='kategoria_filtr.html',
-#                       # context={'produkty': Produkt.objects.filter(kategoria__nazwa__contains='far')})
-#                       # context={'produkty': Produkt.objects.filter(kategoria__nazwa__contains=f'{a}')})
-#                       # context={'produkty': Produkt.objects.filter(kategoria__nazwa__in=f'{a}')})
-#                       context={'produkty': Produkt.objects.filter(kategoria = Kategoria.objects.all()[0])},
-#         )
 
 class KategoriaFiltrSelectView(LoginRequiredMixin, FormView):
     template_name = 'kategoria_select_form.html'
@@ -153,6 +135,29 @@ class KategoriaSelectDeleteView(LoginRequiredMixin, FormView):
 
 
 #---------------------------------PRODUKT----------------------------------
+class Dodaj_do_koszyka(View):
+    def get(self,request, pk):
+        if not 'koszyk' in request.session or not request.session['koszyk']:
+            request.session['koszyk'] = [pk]
+        else:
+            saved_list = request.session['koszyk']
+            saved_list.append(pk)
+            request.session['koszyk'] = saved_list
+
+        # # print('maja1:', request.session)
+        # # print('maja2:', request.session.keys())
+        # print('maja3:', request.session.items())
+        # # print('maja3:', dir(request.session))
+        # # print('maja4:', request.session.setdefault('koszyk', []))
+        # print(request.session['koszyk'].append(pk))
+        # print('maja5:', request.session['koszyk'])
+        # ### request.session.pop('koszyk')
+        return render(request,
+                      template_name='dodaj_do_koszyka.html',
+                      context={'kosz': request.session['koszyk'] },
+                      )
+
+
 class ProduktView(View):
     def get(self,request):
         # zd=Produkt.objects.all()[0].zdjecie
@@ -175,11 +180,15 @@ class ProduktCreateView(LoginRequiredMixin, FormView):
     form_class = ProduktForm
     success_url = reverse_lazy('produkt')
     # permission_required = 'sklepApp.add_produkt'
+    def fun(self):
+        return 1
 
     def form_valid(self, form):
         result= super().form_valid(form)
         moj_produkt=form.cleaned_data
+
         Produkt.objects.create(nazwa= moj_produkt['nazwa'],
+                                # nazwa= self.fun(),
                                kategoria= moj_produkt['kategoria'],
                                opis= moj_produkt['opis'],
                                # zdjecie=moj_produkt['zdjecie'],

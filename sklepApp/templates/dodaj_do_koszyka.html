@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dodaj_do_koszyka</title>
+</head>
+<body>
+{% extends 'base.html' %}
+{% block content %}
+    <p>Dodano produkt do koszyka </p>
+{% for i in kosz %}
+{{ i }}
+{% endfor %}
+
+
+
+
+{% endblock %}
+</body>
+</html>

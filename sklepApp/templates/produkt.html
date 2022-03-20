@@ -86,7 +86,7 @@
                 <td> {{ produkt.cena }}</td>
 <!--                <td> {{ produkt.data_modyfikacji }}</td>-->
 <!--                <td> {{ produkt.data_dodania }}</td>-->
-                <td> <button type="submit" class="dodaj" onclick="window.location.href='http://127.0.0.1:8000/koszykin/'">dodaj do koszyka "link"</button> </td>
+                <td> <button type="submit" class="dodaj" onclick="window.location.href='http://127.0.0.1:8000/produkt/dodaj/{{ produkt.id }}'">dodaj do koszyka "link"</button> </td>
 
             </tr>
             {% empty %}

@@ -29,7 +29,7 @@ from sklepApp.views import UserView, UserCreateView, UserUpdateView,UserDeleteVi
     UserSelectUpdateView, UserSelectDeleteView
 # from sklepApp.views import Koszyk_loginView, Koszyk_loginCreateView
 from sklepApp.views import KategoriaFiltrSelectView, Filtr
-
+from sklepApp.views import Dodaj_do_koszyka
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -41,6 +41,7 @@ urlpatterns = [
     path('produkt/update', ProduktSelectUpdateView.as_view(), name='select_produkt_update'),
     path('produkt/delete/<pk>', ProduktDeleteView.as_view(), name='produkt_delete'),
     path('produkt/delete/', ProduktSelectDeleteView.as_view(), name='select_produkt_delete'),
+    path('produkt/dodaj/<pk>', Dodaj_do_koszyka.as_view(), name='dodaj_do_koszyka'),
 
     path('kategoria/', KategoriaView.as_view(), name='kategoria'),
     path('kategoria/create', KategoriaCreateView.as_view(), name='kategoria_create'),
