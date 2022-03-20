@@ -12,7 +12,7 @@
             {% csrf_token %}
             <table> {{ form }} </table>
             <input type="submit" value="Wybierz" class="wybierz">
-            <input type="submit" value="Anuluj" onclick="window.location.href='/kategoria/'" class="anuluj">
+            <input type="button" value="Anuluj" class="anuluj" onclick="window.location.href='/kategoria/'" >
         </form>
     {% endblock %}
 

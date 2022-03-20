@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>a</title>
+</head>
+{% extends 'base.html' %}
+<body>
+{% block content %}
+<h2>Produkty z kategorii: {{ nazwa_kategorii|upper }}</h2>
+<table border="1" bgcolor="pink" style="border-top-style:double; border-color:yellow; color:darkblue">    <tr>
+        <th>NAZWA</th>
+        <th>CENA</th>
+        <th>STAN</th>
+    </tr>
+    <tr>
+        {% for i in produkty %}
+        <td>{{i.nazwa}}</td>
+        <td>{{i.cena}}</td>
+        <td>{{i.ilosc_w_magazynie}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock%}
+</body>
+</html>

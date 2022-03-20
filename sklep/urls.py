@@ -28,7 +28,9 @@ from sklepApp.views import AdresView, AdresCreateView, AdresUpdateView, AdresDel
 from sklepApp.views import UserView, UserCreateView, UserUpdateView,UserDeleteView, \
     UserSelectUpdateView, UserSelectDeleteView
 # from sklepApp.views import Koszyk_loginView, Koszyk_loginCreateView
-from sklepApp.views import KategoriaFiltrView
+from sklepApp.views import KategoriaFiltrSelectView, Filtr
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/login/', MojeLogwanie.as_view(), name='login'),
@@ -46,7 +48,8 @@ urlpatterns = [
     path('kategoria/update', KategoriaSelectUpdateView.as_view(), name='select_kategoria_update'),
     path('kategoria/delete/<pk>', KategoriaDeleteView.as_view(), name='kategoria_delete'),
     path('kategoria/delete/', KategoriaSelectDeleteView.as_view(), name='select_kategoria_delete'),
-    path('kategoria/filtr', KategoriaFiltrView.as_view(), name='kategoria_filtr'),
+    path('kategoria/filtr/', KategoriaFiltrSelectView.as_view(), name='select_kategoria_filtr'),
+    path('kategoria/filtr/<pk>', Filtr.as_view(), name='kategoria_filtr'),
 
     path('email/', EmailView.as_view(), name='email'),
     path('email/create', EmailCreateView.as_view(), name='email_create'),

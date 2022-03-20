@@ -11,7 +11,9 @@
     <form method="post">
         {% csrf_token %}
         <table> {{ form }} </table>
-        <input type="submit" value="Dodaj", class="dodaj">
+        <input type="submit" value="Dodaj", class="dodaj" >
+        <input type="submit" value="Anuuj" class="dodaj" onclick="window.location.href='/produkt/'">
+
     </form>
     {% endblock %}
 </body>

@@ -1,5 +1,6 @@
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.http import HttpResponse
 
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -30,25 +31,68 @@ class KategoriaView(View):
                       template_name='kategoria.html',
                       context={'kategorie': Kategoria.objects.all()}
                       )
-class KategoriaFiltrView(View):
-    def get(self,request):
-        knazwa = Kategoria.objects.all()
-        print(len(knazwa))
-        # print(knazwa[1])
-        for i in range(len(knazwa)):
-            kate= knazwa[i]
-            # print(dir(knazwa[i]))
-        a=[knazwa[i].nazwa for i in range(len(knazwa))]
-        print(a)
 
+# class KategoriaFiltrView(View):
+#     def get(self,request):
+#         knazwa = Kategoria.objects.all()
+#         print(len(knazwa))
+#         # print(knazwa[1])
+#         for i in range(len(knazwa)):
+#             kate= knazwa[i]
+#             # print(dir(knazwa[i]))
+#         a=[knazwa[i].nazwa for i in range(len(knazwa))]
+#         print(a)
+#
+#         return render(request,
+#                       template_name='kategoria_filtr.html',
+#                       # context={'produkty': Produkt.objects.filter(kategoria__nazwa__contains='far')})
+#                       # context={'produkty': Produkt.objects.filter(kategoria__nazwa__contains=f'{a}')})
+#                       # context={'produkty': Produkt.objects.filter(kategoria__nazwa__in=f'{a}')})
+#                       context={'produkty': Produkt.objects.filter(kategoria = Kategoria.objects.all()[0])},
+#         )
+
+class KategoriaFiltrSelectView(LoginRequiredMixin, FormView):
+    template_name = 'kategoria_select_form.html'
+    form_class = KategoriaSelactForm
+    success_url = reverse_lazy('kategoria')
+    # permission_required = 'sklepApp.delete_produkt'
+
+    def form_valid(self, form):
+        result= super(KategoriaFiltrSelectView, self).form_valid(form)
+        moje_kategorie = form.cleaned_data
+
+        id_kategoria = moje_kategorie['kategorie'].id
+        odp = redirect('kategoria_filtr', pk=id_kategoria)
+
+        return odp
+
+class Filtr(View):
+    def get(self, request, pk):
+        nazwa_kategorii = Kategoria.objects.filter(id=pk)[0]
+        # print(nazwa_kategorii)
+        # print(dir(nazwa_kategorii))
+        # print(type(nazwa_kategorii))
+        produkty_wg_kategorii = Produkt.objects.filter(kategoria=pk)
+        lista_produktow=[produkty_wg_kategorii[i] for i in range(len(produkty_wg_kategorii))]
+
+        # for i in range(len(kat)):
+        #     dana=kat[i]
+        #     print('t=',kat[i])
+        # print('->',a)
+        # print('maja0:', kat)
+        # print('maja00:', len(kat))
+        # print('maja1:',type(kat))
+        # print('maja2:',dir(kat))
+        # print('maja3:',pk)
+        # print('maja4:',type(pk))
+        # index=int(pk)
         return render(request,
-                      template_name='kategoria_filtr.html',
-                      # context={'produkty': Produkt.objects.filter(kategoria__nazwa__contains='far')})
-                      # context={'produkty': Produkt.objects.filter(kategoria__nazwa__contains=f'{a}')})
-                      # context={'produkty': Produkt.objects.filter(kategoria__nazwa__in=f'{a}')})
-                    context={'produkty': Produkt.objects.filter(kategoria = Kategoria.objects.all()[0])},
-        )
+                      template_name='produkty_wg_kategorii.html',
+                      context={'produkty': lista_produktow,
+                               'nazwa_kategorii': nazwa_kategorii },
+                      )
 
+#----------------------------------------
 class KategoriaCreateView(LoginRequiredMixin, FormView):
     template_name = 'kategoria_create_form.html'
     form_class = KategoriaForm

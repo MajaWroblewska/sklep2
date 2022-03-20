@@ -7,7 +7,7 @@
 <body>
     {% extends 'base.html' %}
     {% block content %}
-    <h2>Utwórz nowego urzytkownika:</h2>
+    <h2>Utworz nowego użytkownika:</h2>
     <form method="post">
         {% csrf_token %}
         <table> {{ form }} </table>
