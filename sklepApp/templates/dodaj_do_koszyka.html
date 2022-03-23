@@ -8,13 +8,12 @@
 {% extends 'base.html' %}
 {% block content %}
     <p>Dodano produkt do koszyka </p>
-{% for i in kosz %}
-{{ i }}
-{% endfor %}
+<p> ilość produktów w koszyku = {{ kosz|length }} = {{ produkty|length }}</p>
+<button type="submit" class="clear" onclick="window.location.href='http://127.0.0.1:8000/kategoria'">Wyczyść koszyk</button> </td>
 
-
-
-
+    {% for dodany_produkt in produkty %}
+    <li> {{ dodany_produkt }} -> </li>
+    {% endfor %}
 {% endblock %}
 </body>
 </html>

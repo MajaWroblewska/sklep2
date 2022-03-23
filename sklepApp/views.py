@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponse
@@ -27,6 +29,12 @@ class MojeLogwanie(LoginView):
 # ---------------------------------KATEGORIA--------------------------------
 class KategoriaView(View):
     def get(self, request):
+        print('maja1',request.session['koszyk'])
+        a= request.session['koszyk']
+        print(a)
+        a.clear()
+        request.session['koszyk']=a
+        print('maja3',a)
         return render(request,
                       template_name='kategoria.html',
                       context={'kategorie': Kategoria.objects.all()}
@@ -152,9 +160,19 @@ class Dodaj_do_koszyka(View):
         # print(request.session['koszyk'].append(pk))
         # print('maja5:', request.session['koszyk'])
         # ### request.session.pop('koszyk')
+        for i in request.session['koszyk']:
+            # print(i)
+            pro = Produkt.objects.filter(id=i).all()[0]
+            # print('1',pro)
+            # print('2',dir(pro))
+            # print('3',type(pro))
+
+        lista=[Produkt.objects.filter(id=i).all()[0] for i in request.session['koszyk']]
+        pprint(lista)
         return render(request,
                       template_name='dodaj_do_koszyka.html',
-                      context={'kosz': request.session['koszyk'] },
+                      context={'kosz': request.session['koszyk'],
+                               'produkty': lista},
                       )
 
 
