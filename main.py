@@ -12,5 +12,9 @@ def print_hi(name):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi('PyCharm')
+    MC = ['styczen', 'luty', 'marzec', 'kwiecień', 'maj', 'czerwiec', 'lipiec', 'sierpień', 'wrzesień', 'październik',
+          'listopad', 'grudzień']
+    MIESIACE = {str(lp):value   for lp, value in enumerate(MC)}
+    print(MIESIACE)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

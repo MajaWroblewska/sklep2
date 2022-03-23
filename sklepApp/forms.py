@@ -18,20 +18,35 @@ class KategoriaSelactForm(forms.Form):
 
 
 #---------------------------------PRODUKT----------------------------------
+BIRTH_YEAR_CHOICES = ['1980', '1981', '1982']
+FAVORITE_COLORS_CHOICES = [
+    ('blue', 'Niebieski'),
+    ('green', 'Zielony'),
+    ('black', 'Czarny'),
+    ('red', 'DUPA')
+]
+MC=['styczen', 'luty', 'marzec', 'kwiecień', 'maj', 'czerwiec', 'lipiec', 'sierpień', 'wrzesień', 'październik', 'listopad', 'grudzień']
+# MIESIACE={'1':'styczen', '2':'luty', '3':'marzec', '4':'kwiecien'}
+MIESIACE = {str(lp):value   for lp, value in enumerate(MC)}
 class ProduktForm(forms.ModelForm):
     class Meta:
         model= Produkt
         # fields= '__all__'
-        exclude= ['data_dodania','data_modyfikacji' ]
+        exclude= ['data_dodania','data_modyfikacji']
 
     nazwa = forms.CharField(max_length=200)
     kategoria = forms.ModelChoiceField(queryset=Kategoria.objects)
     opis = forms.CharField(widget=Textarea)
-    zdjecie = forms.ImageField(allow_empty_file=True)
+    zdjecie = forms.ImageField(allow_empty_file=True, required=False)
     ilosc_w_magazynie = forms.IntegerField(min_value=0)
     cena = forms.DecimalField(min_value=0, max_digits=10, decimal_places=2)
-    data_dodania = forms.DateTimeField()
-    data_modyfikacji = forms.DateTimeField()
+    data_dodania = forms.DateTimeField(widget = forms.SelectDateWidget)
+    data_modyfikacji = forms.DateTimeField(widget = forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES, months=MIESIACE))
+
+    # data_modyfikacji = forms.MultipleChoiceField(required=False,
+    #                                              widget=forms.CheckboxSelectMultiple,
+    #                                              choices=FAVORITE_COLORS_CHOICES,
+    #                                              )
 
 
 class ProduktSelectForm(forms.Form):
